@@ -46,18 +46,21 @@ for classifier in classifiers:
 
     # Null label is 2 since it is the no movement class
     metrics = om.extract_common_metrics(test_meta["classes"], preds, 2)
-    cas.append(metrics["CA"])
-    aers.append(metrics["AER"])
-    inss.append(metrics["INS"])
+    cas.append(metrics["CA"] * 100)
+    aers.append(metrics["AER"] * 100)
+    inss.append(metrics["INS"] * 100)
 
 # Plot offline metrics
 fig, axs = plt.subplots(3)
 axs[0].bar(classifiers, cas)
 axs[0].set_title("Classification Accuracy")
+axs[0].set_ylabel("Percent (%)")
 axs[1].bar(classifiers, aers)
 axs[1].set_title("Active Error")
+axs[1].set_ylabel("Percent (%)")
 axs[2].bar(classifiers, inss)
 axs[2].set_title("Instability")
+axs[2].set_ylabel("Percent (%)")
 plt.show()
     
 
