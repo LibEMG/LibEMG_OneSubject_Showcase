@@ -42,13 +42,13 @@ for classifier in classifiers:
 
     # Fit and run the classifier
     model.fit(classifier, data_set.copy())
-    preds, probs = model.run(test_features, test_meta["classes"])
+    preds, probs = model.run(test_features)
 
     # Null label is 2 since it is the no movement class
     metrics = om.extract_common_metrics(test_meta["classes"], preds, 2)
     cas.append(metrics["CA"] * 100)
-    aers.append(metrics["AER"] * 100)
-    inss.append(metrics["INS"] * 100)
+    aers.append(metrics["AER"] * 100)
+    inss.append(metrics["INS"] * 100)
 
 # Plot offline metrics
 fig, axs = plt.subplots(3)
