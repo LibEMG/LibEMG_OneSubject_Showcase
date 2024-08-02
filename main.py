@@ -1,5 +1,5 @@
 from libemg.datasets import OneSubjectMyoDataset
-from libemg.emg_classifier import EMGClassifier
+from libemg.emg_predictor import EMGClassifier
 from libemg.feature_extractor import FeatureExtractor
 from libemg.offline_metrics import OfflineMetrics
 import matplotlib.pyplot as plt
@@ -38,10 +38,10 @@ inss = []
 
 # Extract metrics for each classifier
 for classifier in classifiers:
-    model = EMGClassifier()
+    model = EMGClassifier(classifier)
 
     # Fit and run the classifier
-    model.fit(classifier, data_set.copy())
+    model.fit(data_set.copy())
     preds, probs = model.run(test_features)
 
     # Null label is 2 since it is the no movement class
@@ -61,6 +61,7 @@ axs[1].set_ylabel("Percent (%)")
 axs[2].bar(classifiers, inss)
 axs[2].set_title("Instability")
 axs[2].set_ylabel("Percent (%)")
+plt.tight_layout()
 plt.show()
     
 
